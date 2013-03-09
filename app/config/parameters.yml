@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_pgsql
+    database_host: 127.0.0.1
+    database_port: '5432'
+    database_name: mejor_promo
+    database_user: ••••••••
+    database_password: postgres
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: 103f67e467b023e66df62ac4f1d101dbef
+    database_path: null
