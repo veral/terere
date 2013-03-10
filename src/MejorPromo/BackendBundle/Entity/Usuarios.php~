@@ -1,0 +1,207 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Usuarios
+ *
+ * @ORM\Table(name="usuarios")
+ * @ORM\Entity
+ */
+class Usuarios
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="usuarios_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tipo_usuario", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato tipo_usuario no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para tipo_usuario debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de tipo_usuario.")
+     */
+    private $tipoUsuario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=125, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato mail no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para mail es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=125, message="El texto para mail es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $mail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=250, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato username no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para username es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=250, message="El texto para username es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato password no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para password es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para password es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato salt no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para salt es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para salt es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $salt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook", type="string", length=150, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato facebook no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para facebook es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para facebook es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $facebook;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="twitter", type="string", length=150, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato twitter no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para twitter es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para twitter es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $twitter;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="permite_email", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato permite_email no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para permite_email debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de permite_email.")
+     */
+    private $permiteEmail;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_alta", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha_alta no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha_alta debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fechaAlta;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_registro", type="string", length=25, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato ip_registro no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para ip_registro es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=25, message="El texto para ip_registro es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $ipRegistro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato token no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para token es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para token es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $token;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato estado no puede ser nulo.")
+     */
+    private $estado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="ultima_conexion", type="datetime", nullable=true)
+     *
+     * @Assert\NotNull(message="El dato ultima_conexion no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para ultima_conexion debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $ultimaConexion;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Categorias", inversedBy="usuarios")
+     * @ORM\JoinTable(name="usuarios_categorias",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="usuarios_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="categorias_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $categorias;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Roles", mappedBy="usuarios")
+     */
+    private $roles;
+
+    /**
+     * @var \Personas
+     *
+     * @ORM\ManyToOne(targetEntity="Personas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="personas_id", referencedColumnName="id")
+     * })
+     */
+    private $personas;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+}

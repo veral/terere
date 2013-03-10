@@ -1,0 +1,7 @@
+backend_entidadesfinancieras:
+    resource: "@BackendBundle/Resources/config/routing/entidadesfinancieras.yml"
+    prefix:   /entidadesfinancieras
+
+backendbundle_cajasaperturas:
+    resource: "@BackendBundle/Resources/config/routing/cajasaperturas.yml"
+    prefix:   /cajasaperturas

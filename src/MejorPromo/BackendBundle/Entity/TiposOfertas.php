@@ -1,0 +1,72 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * TiposOfertas
+ *
+ * @ORM\Table(name="tipos_ofertas")
+ * @ORM\Entity
+ */
+class TiposOfertas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="tipos_ofertas_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tipo_oferta", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato tipo_oferta no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para tipo_oferta es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para tipo_oferta es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $tipoOferta;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set tipoOferta
+     *
+     * @param string $tipoOferta
+     * @return TiposOfertas
+     */
+    public function setTipoOferta($tipoOferta)
+    {
+        $this->tipoOferta = $tipoOferta;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipoOferta
+     *
+     * @return string 
+     */
+    public function getTipoOferta()
+    {
+        return $this->tipoOferta;
+    }
+}

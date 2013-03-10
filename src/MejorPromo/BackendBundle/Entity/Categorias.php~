@@ -1,0 +1,107 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Categorias
+ *
+ * @ORM\Table(name="categorias")
+ * @ORM\Entity
+ */
+class Categorias
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="categorias_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato nombre no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para nombre es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para nombre es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato slug no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para slug es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para slug es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $slug;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato estado no puede ser nulo.")
+     */
+    private $estado;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Ofertas", mappedBy="categoria")
+     */
+    private $oferta;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Tiendas", inversedBy="categorias")
+     * @ORM\JoinTable(name="tiendas_categorias",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="categorias_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tiendas_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $tiendas;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Usuarios", mappedBy="categorias")
+     */
+    private $usuarios;
+
+    /**
+     * @var \Categorias
+     *
+     * @ORM\ManyToOne(targetEntity="Categorias")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categoria_padre", referencedColumnName="id")
+     * })
+     */
+    private $categoriaPadre;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->oferta = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tiendas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->usuarios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+}

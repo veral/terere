@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<script>
+
+jQuery(document).ready(function() { 
+    $('a.add').live('click', function(event){
+        event.preventDefault();
+        add();
+    });
+});
+
+function add() {
+    var collectionHolder = $('#mejorpromo_backendbundle_cajasaperturastype_cajaAperturaValores');
+    var prototype = collectionHolder.attr('data-prototype');
+    form = prototype.replace(/__name__/g, collectionHolder.children().length);
+    collectionHolder.append(form);
+}
+
+
+</script>
+
+    <h1>CajasAperturas creation</h1>
+
+    <form action="{{ path('cajasaperturas_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+
+        <ul class="record_actions">
+    <li>
+        <a class="add" href="#">
+            Añadir +
+        </a>
+
+        <a href="{{ path('cajasaperturas') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

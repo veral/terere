@@ -1,0 +1,30 @@
+bancos:
+    pattern:  /
+    defaults: { _controller: "BackendBundle:Bancos:index" }
+
+bancos_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackendBundle:Bancos:show" }
+
+bancos_new:
+    pattern:  /new
+    defaults: { _controller: "BackendBundle:Bancos:new" }
+
+bancos_create:
+    pattern:  /create
+    defaults: { _controller: "BackendBundle:Bancos:create" }
+    requirements: { _method: post }
+
+bancos_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendBundle:Bancos:edit" }
+
+bancos_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendBundle:Bancos:update" }
+    requirements: { _method: post|put }
+
+bancos_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendBundle:Bancos:delete" }
+    requirements: { _method: post|delete }

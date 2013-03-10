@@ -1,0 +1,366 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Ofertas
+ *
+ * @ORM\Table(name="ofertas")
+ * @ORM\Entity
+ */
+class Ofertas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ofertas_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato nombre no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para nombre es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para nombre es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titulo_corto", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato titulo_corto no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para titulo_corto es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para titulo_corto es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $tituloCorto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato slug no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para slug es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para slug es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="introduccion", type="text", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato introduccion no puede ser nulo.")
+     */
+    private $introduccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato descripcion no puede ser nulo.")
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="condiciones", type="text", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato condiciones no puede ser nulo.")
+     */
+    private $condiciones;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="porcentaje_ganancia", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato porcentaje_ganancia no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para porcentaje_ganancia debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo porcentaje_ganancia se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $porcentajeGanancia;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="precio_mercado", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato precio_mercado no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para precio_mercado debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo precio_mercado se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $precioMercado;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="precio_oferta", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato precio_oferta no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para precio_oferta debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo precio_oferta se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $precioOferta;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="costo_envio", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato costo_envio no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para costo_envio debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo costo_envio se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $costoEnvio;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="descuento", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato descuento no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para descuento debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo descuento se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $descuento;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_publicacion", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha_publicacion no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha_publicacion debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fechaPublicacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin_publicacion", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha_fin_publicacion no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha_fin_publicacion debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fechaFinPublicacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_expiracion", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha_expiracion no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha_expiracion debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fechaExpiracion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="compras_maximas", type="integer", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato compras_maximas no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para compras_maximas debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de compras_maximas.")
+     */
+    private $comprasMaximas;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="compras_minimas", type="integer", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato compras_minimas no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para compras_minimas debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de compras_minimas.")
+     */
+    private $comprasMinimas;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato estado no puede ser nulo.")
+     */
+    private $estado;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="orden", type="integer", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato orden no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para orden debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de orden.")
+     */
+    private $orden;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="requiere_reserva", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato requiere_reserva no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para requiere_reserva debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de requiere_reserva.")
+     */
+    private $requiereReserva;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="requiere_individualizar", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato requiere_individualizar no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para requiere_individualizar debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de requiere_individualizar.")
+     */
+    private $requiereIndividualizar;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="template", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato template no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para template debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de template.")
+     */
+    private $template;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imagen_principal", type="string", length=150, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato imagen_principal no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para imagen_principal es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para imagen_principal es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $imagenPrincipal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imagenes", type="text", nullable=true)
+     *
+     * @Assert\NotNull(message="El dato imagenes no puede ser nulo.")
+     */
+    private $imagenes;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_maxima_venta", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato cantidad_maxima_venta no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cantidad_maxima_venta debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de cantidad_maxima_venta.")
+     */
+    private $cantidadMaximaVenta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_maxima_regalo", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato cantidad_maxima_regalo no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cantidad_maxima_regalo debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de cantidad_maxima_regalo.")
+     */
+    private $cantidadMaximaRegalo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Categorias", inversedBy="oferta")
+     * @ORM\JoinTable(name="ofertas_categorias",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="oferta", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="categoria", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $categoria;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Ciudades", mappedBy="ofertas")
+     */
+    private $ciudades;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="ModosEntrega", inversedBy="ofertas")
+     * @ORM\JoinTable(name="ofertas_modos_entrega",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ofertas_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="modos_entrega_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $modosEntrega;
+
+    /**
+     * @var \Impuestos
+     *
+     * @ORM\ManyToOne(targetEntity="Impuestos")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="impuesto_id", referencedColumnName="id")
+     * })
+     */
+    private $impuesto;
+
+    /**
+     * @var \Tiendas
+     *
+     * @ORM\ManyToOne(targetEntity="Tiendas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tienda_id", referencedColumnName="id")
+     * })
+     */
+    private $tienda;
+
+    /**
+     * @var \TiposOfertas
+     *
+     * @ORM\ManyToOne(targetEntity="TiposOfertas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipo_oferta_id", referencedColumnName="id")
+     * })
+     */
+    private $tipoOferta;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categoria = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ciudades = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->modosEntrega = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+}

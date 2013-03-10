@@ -1,0 +1,51 @@
+{% extends 'SystemBundle::layout.html.twig' %}
+
+{% block body -%}
+<div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon">
+                                    <i class="icon-th"></i>
+                                </span>
+                                <h5>Static table</h5>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Entidad</th>
+                                            <th>Estado</th>
+                                            <th>
+                                                <a class="btn btn-primary" href="{{ path('entidadesfinancieras_new') }}">
+                                                    Create a new entry
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for entity in entities %}
+                                            <tr>
+                                                <td>{{ entity.entidad }}</td>
+                                                <td>{{ entity.estado }}</td>
+                                                <td>
+                                                <ul>
+                                                    <li>
+                                                        <a href="{{ path('entidadesfinancieras_show', { 'id': entity.id }) }}">show</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ path('entidadesfinancieras_edit', { 'id': entity.id }) }}">edit</a>
+                                                    </li>
+                                                </ul>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>                            
+                            </div>
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+{% endblock %}

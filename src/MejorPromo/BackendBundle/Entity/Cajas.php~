@@ -1,0 +1,58 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Cajas
+ *
+ * @ORM\Table(name="cajas")
+ * @ORM\Entity
+ */
+class Cajas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="cajas_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="punto_expedicion", type="integer", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato punto_expedicion no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para punto_expedicion debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de punto_expedicion.")
+     */
+    private $puntoExpedicion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado", type="integer", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato estado no puede ser nulo.")
+     */
+    private $estado;
+
+    /**
+     * @var \Locales
+     *
+     * @ORM\ManyToOne(targetEntity="Locales")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="local_id", referencedColumnName="id")
+     * })
+     */
+    private $local;
+
+
+}

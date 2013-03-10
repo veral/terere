@@ -1,0 +1,111 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * CobrosValores
+ *
+ * @ORM\Table(name="cobros_valores")
+ * @ORM\Entity
+ */
+class CobrosValores
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="cobros_valores_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato monto no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para monto debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo monto se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $monto;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="cotizacion", type="decimal", nullable=true)
+     *
+     * @Assert\NotNull(message="El dato cotizacion no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cotizacion debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo cotizacion se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $cotizacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="documento", type="string", length=20, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato documento no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para documento es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=20, message="El texto para documento es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $documento;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fecha;
+
+    /**
+     * @var \MediosPago
+     *
+     * @ORM\ManyToOne(targetEntity="MediosPago")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="medio_pago_id", referencedColumnName="id")
+     * })
+     */
+    private $medioPago;
+
+    /**
+     * @var \Cobros
+     *
+     * @ORM\ManyToOne(targetEntity="Cobros")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="cobro_id", referencedColumnName="id")
+     * })
+     */
+    private $cobro;
+
+    /**
+     * @var \Monedas
+     *
+     * @ORM\ManyToOne(targetEntity="Monedas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="moneda_id", referencedColumnName="id")
+     * })
+     */
+    private $moneda;
+
+    /**
+     * @var \EntidadesFinancieras
+     *
+     * @ORM\ManyToOne(targetEntity="EntidadesFinancieras")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="banco_id", referencedColumnName="id")
+     * })
+     */
+    private $banco;
+
+
+}

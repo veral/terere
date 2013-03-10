@@ -1,0 +1,121 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * UsuariosOfertas
+ *
+ * @ORM\Table(name="usuarios_ofertas")
+ * @ORM\Entity
+ */
+class UsuariosOfertas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="usuarios_ofertas_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_venta", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato cantidad_venta no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cantidad_venta debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de cantidad_venta.")
+     */
+    private $cantidadVenta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_regalo", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato cantidad_regalo no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cantidad_regalo debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de cantidad_regalo.")
+     */
+    private $cantidadRegalo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_marcado", type="datetime", nullable=true)
+     *
+     * @Assert\NotNull(message="El dato fecha_marcado no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha_marcado debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fechaMarcado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_vencimiento", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha_vencimiento no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha_vencimiento debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fechaVencimiento;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tipo_reserva", type="integer", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato tipo_reserva no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para tipo_reserva debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de tipo_reserva.")
+     */
+    private $tipoReserva;
+
+    /**
+     * @var \Ofertas
+     *
+     * @ORM\ManyToOne(targetEntity="Ofertas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="oferta_id", referencedColumnName="id")
+     * })
+     */
+    private $oferta;
+
+    /**
+     * @var \OfertasReservas
+     *
+     * @ORM\ManyToOne(targetEntity="OfertasReservas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="oferta_hora_id", referencedColumnName="id")
+     * })
+     */
+    private $ofertaHora;
+
+    /**
+     * @var \OfertasIndividuales
+     *
+     * @ORM\ManyToOne(targetEntity="OfertasIndividuales")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="oferta_atributo_id", referencedColumnName="id")
+     * })
+     */
+    private $ofertaAtributo;
+
+    /**
+     * @var \Usuarios
+     *
+     * @ORM\ManyToOne(targetEntity="Usuarios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * })
+     */
+    private $usuario;
+
+
+}

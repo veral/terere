@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block metas %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+        
+{% block stylesheets %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{# output='css/livetech/main.css'#}
+	{% stylesheets '@SystemBundle/Resources/public/css/*' %}
+	    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+	{% endstylesheets %}  
+{% endblock %}
+
+{% block body %}
+    {% block menu_nav %}
+        
+    {% endblock %}
+    <div class="container">
+        {% include 'SystemBundle::flash-messages.html.twig' %}
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+ 	{# output='js/livetech/main.js' #}
+	{% javascripts '@SystemBundle/Resources/public/js/*' %}
+		<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}

@@ -1,0 +1,30 @@
+entidadesfinancieras:
+    pattern:  /
+    defaults: { _controller: "BackendBundle:EntidadesFinancieras:index" }
+
+entidadesfinancieras_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackendBundle:EntidadesFinancieras:show" }
+
+entidadesfinancieras_new:
+    pattern:  /new
+    defaults: { _controller: "BackendBundle:EntidadesFinancieras:new" }
+
+entidadesfinancieras_create:
+    pattern:  /create
+    defaults: { _controller: "BackendBundle:EntidadesFinancieras:create" }
+    requirements: { _method: post }
+
+entidadesfinancieras_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendBundle:EntidadesFinancieras:edit" }
+
+entidadesfinancieras_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendBundle:EntidadesFinancieras:update" }
+    requirements: { _method: post|put }
+
+entidadesfinancieras_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendBundle:EntidadesFinancieras:delete" }
+    requirements: { _method: post|delete }

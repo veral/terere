@@ -1,0 +1,7 @@
+backend_bancos:
+    resource: "@BackendBundle/Resources/config/routing/bancos.yml"
+    prefix:   /bancos
+
+backend_cajasaperturas:
+    resource: "@BackendBundle/Resources/config/routing/cajasaperturas.yml"
+    prefix:   /cajasaperturas

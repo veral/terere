@@ -1,0 +1,111 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * OfertasReservas
+ *
+ * @ORM\Table(name="ofertas_reservas")
+ * @ORM\Entity
+ */
+class OfertasReservas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="ofertas_reservas_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_utilizacion", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha_utilizacion no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha_utilizacion debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fechaUtilizacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin_utilizacion", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha_fin_utilizacion no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha_fin_utilizacion debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fechaFinUtilizacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="hora_utilizacion", type="datetime", nullable=true)
+     *
+     * @Assert\NotNull(message="El dato hora_utilizacion no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para hora_utilizacion debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $horaUtilizacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="hora_fin_utilizacion", type="datetime", nullable=true)
+     *
+     * @Assert\NotNull(message="El dato hora_fin_utilizacion no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para hora_fin_utilizacion debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $horaFinUtilizacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato cantidad no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cantidad debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de cantidad.")
+     */
+    private $cantidad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_maxima_venta", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato cantidad_maxima_venta no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cantidad_maxima_venta debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de cantidad_maxima_venta.")
+     */
+    private $cantidadMaximaVenta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_maxima_regalo", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato cantidad_maxima_regalo no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cantidad_maxima_regalo debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de cantidad_maxima_regalo.")
+     */
+    private $cantidadMaximaRegalo;
+
+    /**
+     * @var \Ofertas
+     *
+     * @ORM\ManyToOne(targetEntity="Ofertas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ofertas_id", referencedColumnName="id")
+     * })
+     */
+    private $ofertas;
+
+
+}

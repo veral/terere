@@ -1,0 +1,30 @@
+cajasaperturas:
+    pattern:  /
+    defaults: { _controller: "BackendBundle:CajasAperturas:index" }
+
+cajasaperturas_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackendBundle:CajasAperturas:show" }
+
+cajasaperturas_new:
+    pattern:  /new
+    defaults: { _controller: "BackendBundle:CajasAperturas:new" }
+
+cajasaperturas_create:
+    pattern:  /create
+    defaults: { _controller: "BackendBundle:CajasAperturas:create" }
+    requirements: { _method: post }
+
+cajasaperturas_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendBundle:CajasAperturas:edit" }
+
+cajasaperturas_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendBundle:CajasAperturas:update" }
+    requirements: { _method: post|put }
+
+cajasaperturas_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendBundle:CajasAperturas:delete" }
+    requirements: { _method: post|delete }

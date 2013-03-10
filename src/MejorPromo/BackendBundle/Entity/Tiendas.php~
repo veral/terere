@@ -1,0 +1,255 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Tiendas
+ *
+ * @ORM\Table(name="tiendas")
+ * @ORM\Entity
+ */
+class Tiendas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="tiendas_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tienda", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato tienda no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para tienda es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para tienda es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $tienda;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="persona_contacto", type="string", length=250, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato persona_contacto no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para persona_contacto es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=250, message="El texto para persona_contacto es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $personaContacto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="linea_baja", type="string", length=250, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato linea_baja no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para linea_baja es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=250, message="El texto para linea_baja es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $lineaBaja;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="linea_movil", type="string", length=250, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato linea_movil no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para linea_movil es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=250, message="El texto para linea_movil es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $lineaMovil;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato descripcion no puede ser nulo.")
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ubicacion", type="text", nullable=true)
+     *
+     * @Assert\NotNull(message="El dato ubicacion no puede ser nulo.")
+     */
+    private $ubicacion;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitud_gmap", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato latitud_gmap no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para latitud_gmap debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo latitud_gmap se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $latitudGmap;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitud_gmap", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato longitud_gmap no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para longitud_gmap debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo longitud_gmap se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $longitudGmap;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foto", type="string", length=255, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato foto no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para foto es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=255, message="El texto para foto es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $foto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sitio_web", type="string", length=250, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato sitio_web no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para sitio_web es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=250, message="El texto para sitio_web es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $sitioWeb;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=150, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato direccion no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para direccion es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para direccion es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $direccion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ciudad", type="smallint", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato ciudad no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para ciudad debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="/^\w+/", match=true, message = "Sólo se admiten números positivos para el valor de ciudad.")
+     */
+    private $ciudad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=100, nullable=false)
+     *
+     * @Assert\NotNull(message="El dato slug no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para slug es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=100, message="El texto para slug es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cuenta_bancaria", type="string", length=150, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato cuenta_bancaria no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para cuenta_bancaria es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para cuenta_bancaria es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $cuentaBancaria;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cuenta_numero", type="string", length=250, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato cuenta_numero no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para cuenta_numero es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=250, message="El texto para cuenta_numero es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $cuentaNumero;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook", type="string", length=150, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato facebook no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para facebook es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para facebook es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $facebook;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="twitter", type="string", length=150, nullable=true)
+     *
+     * @Assert\NotNull(message="El dato twitter no puede ser nulo.")
+     * @Assert\MinLength(limit=5, message="El texto para twitter es muy corto. Se debe registrar como mínimo {{ limit }} caracteres o más.")
+     * @Assert\MaxLength(limit=150, message="El texto para twitter es muy largo. Sólo se aceptan hasta {{ limit }} caracteres o menos.")
+     */
+    private $twitter;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Categorias", mappedBy="tiendas")
+     */
+    private $categorias;
+
+    /**
+     * @var \TiposTienda
+     *
+     * @ORM\ManyToOne(targetEntity="TiposTienda")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipo_tienda_id", referencedColumnName="id")
+     * })
+     */
+    private $tipoTienda;
+
+    /**
+     * @var \EntidadesFinancieras
+     *
+     * @ORM\ManyToOne(targetEntity="EntidadesFinancieras")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="bancos_id", referencedColumnName="id")
+     * })
+     */
+    private $bancos;
+
+    /**
+     * @var \Usuarios
+     *
+     * @ORM\ManyToOne(targetEntity="Usuarios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuarios_id", referencedColumnName="id")
+     * })
+     */
+    private $usuarios;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+}

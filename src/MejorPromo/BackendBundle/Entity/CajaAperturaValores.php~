@@ -1,0 +1,80 @@
+<?php
+
+namespace MejorPromo\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * CajaAperturaValores
+ *
+ * @ORM\Table(name="caja_apertura_valores")
+ * @ORM\Entity
+ */
+class CajaAperturaValores
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="caja_apertura_valores_id_seq", allocationSize=1, initialValue=1)
+     *
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="monto", type="decimal", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato monto no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para monto debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo monto se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $monto;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="cotizacion", type="decimal", nullable=true)
+     *
+     * @Assert\NotNull(message="El dato cotizacion no puede ser nulo.")
+     * @Assert\Min(limit = 1, message = "El valor para cotizacion debe ser mayor a {{ limit }}, ingrese un valor mayor.")
+     * @Assert\Regex(pattern="^\d{1,18}(\.\d{1,4})?$", match=true, message = "Para el campo cotizacion se admiten hasta 4 decimales y 18 enteros.")
+     */
+    private $cotizacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     *
+     * @Assert\NotNull(message="El dato fecha no puede ser nulo.")
+     * @Assert\DateTime(message = "El valor para fecha debe ser una fecha valida con el formato: dd/mm/YYYY.")
+     */
+    private $fecha;
+
+    /**
+     * @var \CajasAperturas
+     *
+     * @ORM\ManyToOne(targetEntity="CajasAperturas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="caja_apertura_id", referencedColumnName="id")
+     * })
+     */
+    private $cajaApertura;
+
+    /**
+     * @var \Monedas
+     *
+     * @ORM\ManyToOne(targetEntity="Monedas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="moneda_id", referencedColumnName="id")
+     * })
+     */
+    private $moneda;
+
+
+}
